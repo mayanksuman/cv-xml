@@ -3,6 +3,16 @@
   <xsl:output method="xml" version="1.0" omit-xml-declaration="no" indent="yes"/>
   <xsl:param name="versionParam" select="'1.0'"/>
 
+
+  <!-- template for content -->
+  <xsl:template match="b">
+    <fo:inline font-weight="bold">
+      <xsl:value-of select="." />
+    </fo:inline>
+  </xsl:template>
+
+
+  <!-- Main template -->
   <xsl:template match="/">
     <fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
       <fo:layout-master-set>
@@ -143,8 +153,9 @@
 			    <xsl:if test="location/country!=''"><xsl:value-of select="location/country" />, </xsl:if>
 			    <xsl:if test="location/placename!=''"><xsl:value-of select="location/placename" />: </xsl:if>
 			    <xsl:if test="label!=''"><xsl:value-of select="label"/>. </xsl:if>
-			    <xsl:value-of disable-output-escaping="yes"
-			    select="description"/>
+<!--			    <xsl:value-of disable-output-escaping="yes"
+			    select="description"/>-->
+<xsl:apply-templates select="description" />
 			  </fo:block>
 			  <xsl:if test="apport!=''">
 			  <fo:block font-size="8pt" color="#444">

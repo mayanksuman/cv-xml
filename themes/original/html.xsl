@@ -7,6 +7,7 @@
    xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
 
+  <!-- template for content -->
   <xsl:template match="b">
     <b><xsl:value-of select="." /></b>
   </xsl:template>
