@@ -1,0 +1,145 @@
+=================================================================================
+
+				* README *
+
+=================================================================================
+
+	* Project	: CV-XML
+	* Creation Date : 2008/02/10
+	* Last update	: 2008/02/11
+	* Website	: http://adrien.frenchcomp.net
+	* Authors	: Adrien MOGENET <adrien@frenchcomp.net>
+
+
+---------------------------------------------------------------------------------
+I)	TABLE OF CONTENT
+---------------------------------------------------------------------------------
+
+	1) What is CV-XML ?
+	2) How to install it ?
+	   a) Requirements
+	   b) Configuration
+	   c) Test it !
+	3) How to use it ?
+	   a) The program
+	   b) The input format
+	   c) HTML format
+	4) How create/edit themes ?
+
+
+---------------------------------------------------------------------------------
+II)	CONTENT
+---------------------------------------------------------------------------------
+
+1) What is CV-XML ?
+-------------------
+
+  You hate writing / editing / updating / managing your resume(s) in
+  several formats ? CV-XML is going to make your life easier !
+  Just fill a XML file, with a simple text editor, then launch CV-XML,
+  and enjoy the result !
+  CV-XML generate beautiful resumes in PDF, HTML, LaTeX or others formats.
+
+
+
+2) How to install it ?
+----------------------
+
+   a) Requirements
+   ---------------
+
+      To use CV-XML, you need several packages :
+
+      	 * a shell
+	   which is able to execute shell scripts.
+
+	 * unix tools :
+	   cut, rev and basename are the 3 used tools.
+
+      	 * xsltproc
+	   Program to generate HTML and LaTeX files.
+
+	 * fop
+	   Program to generate PDF, PS and TXT files. If you don't
+	   have it, you can download fop here :
+	   -> http://xmlgraphics.apache.org/fop/download.html
+
+   b) Configuration
+   ----------------
+
+      To install CV-XML, first decompress the tarball (gzip format) :
+
+      	 user@host: tar xzf cvxml-1.0.tar.gz
+
+      Then, edit the file "cv-xml". You can edit the first block. The most
+      important part is the second part, called "Path to needed
+      binaries".
+      Default values may work, but you can edit it.
+
+   c) Test it !
+   ------------
+
+      Want to test quickly this program ? No problem ! There is a
+      sample called 'example.xml' in the 'your-cv' directory.
+      Just launch CV-XML like that :
+
+      	   user@host: ./cv-xml -pdf -html-tex -txt
+
+      Then admire the result, opening the different files created in
+      the 'output' directory.
+
+
+
+3) How to use it ?
+------------------
+
+   a) The program
+   --------------
+
+      Very easy ! Launch the script :
+      user@host: ./cv-xml [Options] [file1.xml file2.xml ...]
+
+      Available options :
+
+      	* -pdf		   : Generate a pdf file
+	* -html		   : Generate a html file
+	* -txt		   : Generate a txt file
+	* -tex		   : Generate a LaTeX file
+	* -theme "mytheme" : Select the theme "mytheme"
+
+
+   b) Input format
+   ---------------
+
+      The input file is a XML file, with structure described with the
+      dtd in the file your-cv/cv.dtd.
+
+
+   c) HTML format
+   --------------
+
+      HTML files are encoded in UTF-8. That's why text with accents or
+      special characters may be curiously printed if the browser print
+      these characters in another charset, for any reason.
+      To solve this problem, put a ".htaccess" file in your resumes's
+      directory with the following line :
+
+      		AddDefaultCharset UTF-8
+
+
+
+4) How to edit/create a theme ?
+-------------------------------
+
+   All the themes are stored in the ./themes folder. Each theme
+   directory contains different files :
+
+      * pdf.xsl		: XSL-Fo stylesheet
+      * html.xsl	: XSL stylesheet
+      * style.css	: Linked CSS file for the HTML output
+      * latex.xsl	: XSL stylesheet
+      * txt.xsl		: XSL-Fo stylesheet
+
+
+================================================================================
+								Adrien MOGENET

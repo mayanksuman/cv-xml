@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE cv SYSTEM "cv.dtd">
+
+<resume langage="en"
+	author="Adrien MOGENET"
+	version="1"
+	date="12/02/2008">
+
+  <header>
+    <name>Your Name</name>
+    <lastname>Your Lastname</lastname>
+    <title>Put a Title Here</title>
+    <objective>
+      You can describe your personnal objective here
+    </objective>
+    <coords>
+      <address>Complete address. May change (be improved) soon</address>
+      <phone>+00 0 000 000 000</phone>
+      <email>name@provider.com</email>
+    </coords>
+  </header>
+
+  <body>
+
+    <!-- For example -->
+    <section>
+      <title>Education</title>
+      <details>
+        <element>
+          <label>Specific label</label>
+          <location>
+            <placename>My University</placename>
+            <country>France</country>
+            <town>Paris</town>
+          </location>
+          <date>2007 - 2008</date>
+          <description>Complete description of this item.</description>
+        </element>
+
+        <element>
+          <label>Diploma</label>
+          <date>2007</date>
+          <description>with honors (High School
+	Diploma with major in mathematics).</description>
+        </element>
+
+      </details>
+    </section>
+
+
+    <!-- For example -->
+    <section>
+      <title>Experiences</title>
+      <details>
+
+        <element>
+	  <date>2006 - 2007</date>
+	  <description>A very great experience, in a big company for
+	  an important project.</description>
+	  <apport>C, Objective Caml</apport>
+        </element>
+
+	<element>
+          <label>Project leader</label>
+          <date>2006 - 2007</date>
+          <description>in the CV-XML project, a resume generator !</description>
+          <apport>XML, XSL, XSL-Fo</apport>
+        </element>
+
+
+        <element>
+          <date>2005 - 2006</date>
+          <duration>6 months</duration>
+          <description>Another project, just for example. There is no
+          defined title.</description>
+          <apport>Foo, bar</apport>
+        </element>
+
+        <element>
+          <date>2005</date>
+          <description>I don't know what to write here... imagine a
+          better content !</description>
+          <apport>Techno1, techno2</apport>
+        </element>
+
+	<element>
+	  <date>2003 - 2004</date>
+	  <duration>2 months</duration>
+	  <description>Network administrator in a French network company.</description>
+	  <apport>Network administration</apport>
+	</element>
+
+      </details>
+    </section>
+
+
+    <!-- For example -->
+    <section>
+      <title>Skills and abilities</title>
+      <details>
+
+	<element>
+          <left>General</left>
+          <description>this, that, this, that and this again</description>
+        </element>
+
+	<element>
+	  <left>Tools</left>
+	  <description>CV-XML, a shell, a text editor</description>
+	</element>
+
+
+        <element>
+          <left>Other</left>
+          <description>Foo, bar, foobar.</description>
+        </element>
+
+      </details>
+    </section>
+
+
+    <!-- For example -->
+    <section>
+      <title>Languages</title>
+      <details>
+        <element>
+          <description>Native French speaker</description>
+        </element>
+        <element>
+          <description>Advanced level in English</description>
+        </element>
+        <element>
+          <description>Intermediate level in German</description>
+        </element>
+
+      </details>
+    </section>
+
+
+    <!-- For example -->
+    <section>
+      <title>Interests</title>
+      <details>
+        <element>
+          <description>Electronic musics</description>
+        </element>
+	<element>
+	  <description>Snowboard</description>
+	</element>
+      </details>
+    </section>
+
+  </body>
+</resume>

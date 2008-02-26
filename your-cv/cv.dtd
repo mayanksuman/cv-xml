@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!ELEMENT resume (header, body)>
+<!ATTLIST resume
+	  langage	CDATA #IMPLIED
+	  author	CDATA #IMPLIED
+	  version	CDATA #IMPLIED
+	  date		CDATA #IMPLIED>
+<!ELEMENT header (name, lastname, title?, objective?, coords)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT lastname (#PCDATA)>
+<!ELEMENT title (#PCDATA)>
+<!ELEMENT objective (#PCDATA)>
+<!ELEMENT coords (address?, phone?, email?)>
+<!ELEMENT address (#PCDATA)>
+<!ELEMENT phone (#PCDATA)>
+<!ELEMENT email (#PCDATA)>
+<!ELEMENT body (section)+>
+<!ELEMENT section (title, description?, details)>
+<!ELEMENT details (element)+>
+<!ELEMENT element (label?, location?, (left | (date, duration?))?, description, apport?)>
+<!ELEMENT label (#PCDATA)>
+<!ELEMENT location (placename, country, town)>
+<!ELEMENT placename (#PCDATA)>
+<!ELEMENT country (#PCDATA)>
+<!ELEMENT town (#PCDATA)>
+<!ELEMENT left (#PCDATA)>
+<!ELEMENT description (#PCDATA)>
+<!ELEMENT date (#PCDATA)>
+<!ELEMENT duration (#PCDATA)>
+<!ELEMENT apport (#PCDATA)>

@@ -1,0 +1,289 @@
+#! /bin/sh
+
+#================================================================================
+# ---------------------------
+# CONFIGURATION
+# you can edit these values, but only these values ;-)
+# ---------------------------
+#================================================================================
+
+
+
+
+# 1) Default directories
+# -----------------------
+
+OUTPUT_DIR="./output"		# output directory where files will be generated
+CV_DIR="./your-cv"		# directory where resumes will be searched by
+				# default.
+
+
+# 2) Path to needed binaries
+# -----------------------
+
+PATH_XSLTPROC="xsltproc"	# to generate HTML
+PATH_FOP="fop"			# to generate PDF,
+
+
+
+
+
+
+#================================================================================
+# ---------------------------
+# END CONFIGURATION
+# DON'T CHANGE VALUES BELOW !
+# ---------------------------
+#================================================================================
+
+# ---------------------------
+# GLOBAL PARAMETERS
+# ---------------------------
+
+# DIFFERENT AVAILABLE FORMATS
+OUTPUT_HTML=false
+OUTPUT_PDF=false
+OUTPUT_TXT=false
+OUTPUT_TEX=false
+
+# OTHER OPTIONS, DEFAULT VALUES...
+CV_FILES=""
+THEME="original"
+PROG=`basename $0`
+
+
+# ---------------------------
+# FUNCTIONS
+# ---------------------------
+
+# HELP MESSAGE
+function print_help ()
+{
+    echo "Usage: ./$PROG [Options] files.xml"
+    echo ""
+    echo "[Options]"
+    echo "    --help -h		: Display this help message"
+    echo "    -pdf		: Generate a PDF file"
+    echo "    -html		: Generate a HTML file"
+    echo "    -txt		: Generate a text file"
+    echo "    -tex		: Generate a LaTeX file"
+    echo "    -theme 'mytheme'	: Use the theme \"mytheme\""
+    echo ""
+    echo "[Examples]"
+    echo "    ./$PROG -html"
+    echo "    Generate HTML file for each file in $CV_DIR directory\n"
+    echo "    ./$PROG -html -pdf ~/file1.xml ~/file2.xml -theme mytheme"
+    echo "    Generate HTML and PDF files for file1.xml, file2.xml, with 'mytheme' theme"
+
+}
+
+
+# STATE MESSAGE (SUCCESS OR FAILED)
+function print_state ()
+{
+    state=$1
+    if [ $state -eq 0 ]
+    then
+	echo "$PROG: - Done !"
+    else
+	echo "$PROG: x Error. Check the file logs/error_logs for details."
+    fi
+}
+
+
+# CHECK IF THE THEME IS COMPLETE
+function check_theme ()
+{
+    theme=$1
+
+    if $OUTPUT_HTML; then
+	if `! test -f ./themes/$theme/html.xsl`; then
+	    echo "$PROG: Warning, no HTML stylesheet for theme '$theme'" 1>&2
+	    OUTPUT_HTML=false
+	fi
+    fi
+
+    if $OUTPUT_PDF; then
+	if `! test -f ./themes/$theme/pdf.xsl`; then
+	    echo "$PROG: Warning, no PDF stylesheet for theme '$theme'" 1>&2
+	    OUTPUT_PDF=false
+	fi
+    fi
+
+    if $OUTPUT_TXT; then
+	if `! test -f ./themes/$theme/txt.xsl`; then
+	    echo "$PROG: Warning, no Text stylesheet for theme '$theme'" 1>&2
+	    OUTPUT_TXT=false
+	fi
+    fi
+
+    if $OUTPUT_TEX; then
+	if `! test -f ./themes/$theme/latex.xsl`; then
+	    echo "$PROG: Warning, no LaTeX stylesheet for theme '$theme'" 1>&2
+	    OUTPUT_TEX=false
+	fi
+    fi
+}
+
+
+# CHECK IF THE CONFIGURATION IS OK
+function check_config ()
+{
+    # check if the 'logs' directory exists
+    if `! test -d ./logs`; then
+	mkdir logs
+    fi
+
+    # test the theme
+    `test -d "./themes/$THEME"`
+    if [ $? -ne 0 ]; then
+	echo "$PROG: Error, theme \"$THEME\" doesn't exist." 1>&2
+	exit 1
+    fi
+
+    # test the input file if any
+    for file in $CV_FILES; do
+	`test -f "$file"`
+	if [ $? -ne 0 ]; then
+	    echo "$PROG: Error, file not found : $file" 1>&2
+	    exit 2
+	fi
+    done
+
+    # test if xsltproc is found
+    if $OUTPUT_HTML || $OUTPUT_TEX; then
+	$PATH_XSLTPROC 2>> logs/error_logs 1> /dev/null
+	if [ $? -eq 127 ]; then
+	    echo "$PROG: Warning, xsltproc not found" 1>&2
+	    OUTPUT_HTML=false
+	    OUTPUT_TEX=false
+	fi
+    fi
+
+    # test if FOP is found
+    if $OUTPUT_PDF || $OUTPUT_TXT; then
+	$PATH_FOP 2>> logs/error_logs 2>> /dev/null 1> /dev/null
+	if [ $? -eq 127 ]; then
+	    echo "$PROG: Warning, fop not found" 1>&2
+	    OUTPUT_PDF=false
+	    OUTPUT_TXT=false
+	fi
+    fi
+}
+
+# GENERATE ONE FILE IN EXPECTED FORMAT
+function transform_file ()
+{
+    file=$1
+    base=`echo $(basename $file) | rev | cut -d . -f 2- | rev`
+    options="$THEME $OUTPUT_DIR $file $base"
+
+    if $OUTPUT_HTML; then
+	echo "$PROG: Generate $file in HTML format..."
+	sh generators/generate-html.sh $PATH_XSLTPROC $options 2>> ./logs/error_logs
+	print_state $?
+    fi
+
+    if $OUTPUT_PDF; then
+	echo "$PROG: Generate $file in PDF format..."
+	sh generators/generate-pdf.sh $PATH_FOP $options 2>> ./logs/error_logs
+	print_state $?
+    fi
+
+    if $OUTPUT_TEX; then
+	echo "$PROG: Generate $file in LaTeX format..."
+	sh generators/generate-tex.sh $PATH_XSLTPROC $options 2>> ./logs/error_logs
+	print_state $?
+    fi
+
+    if $OUTPUT_TXT; then
+	echo "$PROG: Generate $file in Text format..."
+	sh generators/generate-txt.sh $PATH_FOP $options 2>> ./logs/error_logs
+	print_state $?
+    fi
+}
+
+
+# GENERATE ALL SPECIFIED FILES
+function generate_files ()
+{
+    # Specified files ?
+    if [ "$CV_FILES" != "" ]; then
+	for file in $CV_FILES; do
+	    transform_file $file
+	done
+    else
+	for file in $CV_DIR/*.xml; do
+	    transform_file $file
+	done
+    fi
+}
+
+
+# ---------------------------
+# BODY
+# ---------------------------
+
+# FIRST CHECK OF CONFIGURATION
+check_config
+
+# NO OPTION ? print help
+if [ $# -eq 0 ]
+then
+    print_help
+    exit 0
+fi
+
+# PARSE DIFFERENT OPTIONS
+while [ "$1" != "" ]
+do
+
+    case $1
+	in
+
+	--help)
+	    print_help
+	    exit 0;;
+
+	-h)
+	    print_help
+	    exit 0;;
+
+	-html)
+	    OUTPUT_HTML=true
+	    shift;;
+
+	-pdf)
+	    OUTPUT_PDF=true
+	    shift;;
+
+	-txt)
+	    OUTPUT_TXT=true
+	    shift;;
+
+	-tex)
+	    OUTPUT_TEX=true
+	    shift;;
+
+	-theme)
+	    if [ "$2" != "" ]; then
+		THEME="$2"
+		shift 2
+	    else
+		echo "$PROG: Error, expected argument for -theme option" 1>&2
+		shift
+	    fi;;
+
+	*)
+	    CV_FILES="$1 $CV_FILES"
+	    shift;;
+    esac
+
+done
+
+# CHECK THE CONFIGURATION
+check_config
+check_theme $THEME
+
+# PERFORM !
+generate_files
