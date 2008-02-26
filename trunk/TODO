@@ -1,0 +1,52 @@
+=================================================================================
+
+			        * TODO LIST *
+
+=================================================================================
+
+	* Project	: CV-XML
+	* Creation Date : 2008/02/10
+	* Last update	: 2008/02/11
+	* Website	: http://adrien.frenchcomp.net
+	* Authors	: Adrien MOGENET <adrien@frenchcomp.net>
+
+---------------------------------------------------------------------------------
+
+FEATURES :
+====================
+[ ] Search how to manage links into a description
+[ ] Add "doc-keywords" and "doc-description" to help search engines
+    for HTML version
+[ ] Add PS as output format
+[x] Generate output filenames
+[ ] System of versionning
+[ ] address -> address (street, postal code, town, country)
+[ ] Check the validity of the XML file according to the DTD.
+
+
+VARIOUS :
+====================
+[ ] Improve the use of <xsl:template> to produce clean code
+[ ] Find automatically location of binaries (FOP, xsltproc...)
+[x] Check configuration only for needed items
+[ ] Finish the 'text' stylesheet for original theme
+[ ] Finish the 'latex' stylesheet for original theme
+
+
+PACKAGING :
+====================
+[x] Provide example
+[x] Organize themes directory
+[x] Provide a .htaccess file -- cancel, see README
+[ ] Define a logs directory
+[x] Provide (and copy) stylesheets for HTML
+[ ] Provide more themes
+
+
+BUGS :
+====================
+[ ] Check the encoding information in <meta> HTML-code
+[ ] Solve problem of accents in LaTeX format
+
+================================================================================
+								Adrien MOGENET
