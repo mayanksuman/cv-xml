@@ -6,7 +6,7 @@
 	  author	CDATA #IMPLIED
 	  version	CDATA #IMPLIED
 	  date		CDATA #IMPLIED>
-<!ELEMENT header (name, lastname, title?, objective?, coords)>
+<!ELEMENT header (name, lastname, age?, nationality?, title?, objective?, coords)>
 <!ELEMENT name (#PCDATA)>
 <!ELEMENT lastname (#PCDATA)>
 <!ELEMENT title (#PCDATA)>
@@ -18,7 +18,10 @@
 <!ELEMENT body (section)+>
 <!ELEMENT section (title, description?, details)>
 <!ELEMENT details (element)+>
-<!ELEMENT element (label?, location?, (left | (date, duration?))?, description, apport?)>
+<!ELEMENT element (label?, location?, (left | (date, duration?))?,
+	  description, apport?)>
+<!ATTLIST element
+	  hidden	CDATA>
 <!ELEMENT label (#PCDATA)>
 <!ELEMENT location (placename, country, town)>
 <!ELEMENT placename (#PCDATA)>

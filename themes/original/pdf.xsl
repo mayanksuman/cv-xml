@@ -20,8 +20,8 @@
 	   master-name="simpleA4"
 	   page-height="29.7cm"
 	   page-width="21cm"
-	   margin-top="2cm"
-	   margin-bottom="2cm"
+	   margin-top="1.5cm"
+	   margin-bottom="1.5cm"
 	   margin-left="2cm"
 	   margin-right="2cm">
 	  <fo:region-body/>
@@ -50,15 +50,25 @@
 		      <fo:block font-size="9pt">
 			<xsl:value-of select="resume/header/coords/address" />
 		      </fo:block>
+		      <fo:block>
+			<xsl:value-of select="resume/header/coords/phone" />
+		      </fo:block>
 		    </fo:block>
 		  </fo:table-cell>
 
 		  <!-- right column -->
 		  <fo:table-cell column-number="2" text-align="end">
 		    <fo:block>
-		      <fo:block>
-			<xsl:value-of select="resume/header/coords/phone" />
-		      </fo:block>
+		      <xsl:if test="resume/header/age!=''">
+			<fo:block>
+			  <xsl:value-of select="resume/header/age"/>
+			</fo:block>
+		      </xsl:if>
+		      <xsl:if test="resume/header/nationality!=''">
+			<fo:block>
+			  <xsl:value-of select="resume/header/nationality"/>
+			</fo:block>
+		      </xsl:if>
 		      <fo:block>
 			<fo:basic-link
 			   external-destination="mailto:{resume/header/coords/email}">
@@ -116,7 +126,7 @@
 	      <!-- end title of section -->
 
 	      <!-- parse each element of the section -->
-	      <xsl:for-each select="details/element">
+	      <xsl:for-each select="details/element[@hidden='no']">
 
 		<fo:table table-layout="fixed" width="100%">
 		  <fo:table-column column-width="40mm"/>
@@ -153,9 +163,7 @@
 			    <xsl:if test="location/country!=''"><xsl:value-of select="location/country" />, </xsl:if>
 			    <xsl:if test="location/placename!=''"><xsl:value-of select="location/placename" />: </xsl:if>
 			    <xsl:if test="label!=''"><xsl:value-of select="label"/>. </xsl:if>
-<!--			    <xsl:value-of disable-output-escaping="yes"
-			    select="description"/>-->
-<xsl:apply-templates select="description" />
+			    <xsl:apply-templates select="description" />
 			  </fo:block>
 			  <xsl:if test="apport!=''">
 			  <fo:block font-size="8pt" color="#444">

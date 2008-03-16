@@ -30,12 +30,22 @@
 	  <!-- header -->
 	  <table width="100%">
 	    <tr>
+
+	      <!-- left column -->
 	      <td width="50%">
 		<xsl:value-of select="/resume/header/name"/>&#160;<xsl:value-of select="/resume/header/lastname"/>
 		<div class="address"><xsl:value-of select="resume/header/coords/address"/></div>
-	      </td>
-	      <td width="50%">
 		<div class="phone"><xsl:value-of select="resume/header/coords/phone" /></div>
+	      </td>
+
+	      <!-- right column -->
+	      <td width="50%">
+		<xsl:if test="resume/header/age!=''">
+		  <div class="age"><xsl:value-of select="resume/header/age"/></div>
+		</xsl:if>
+		<xsl:if test="resume/header/nationality!=''">
+		  <div class="nationality"><xsl:value-of select="resume/header/nationality"/></div>
+		</xsl:if>
 		<div class="email">
 		  <a href="mailto:{resume/header/coords/email}">
 		    <xsl:value-of select="resume/header/coords/email" />
@@ -45,6 +55,7 @@
 	    </tr>
 	  </table>
 
+	  <!-- title and objective -->
 	  <h1><xsl:value-of select="resume/header/title"/></h1>
 	  <div class="objective"><xsl:value-of select="resume/header/objective"/></div>
 
@@ -68,7 +79,7 @@
 	      </xsl:if>
 
 	      <!-- parse each element of the section -->
-              <xsl:for-each select="details/element">
+              <xsl:for-each select="details/element[@hidden='no']">
 		<tr valign="top">
 
 		  <!-- left column -->

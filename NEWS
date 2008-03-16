@@ -1,0 +1,20 @@
+=================================================================================
+
+				   * NEWS *
+
+=================================================================================
+
+Version 1.0b2 (2008-02-XX)
+
+	* Possibility to hidde some fields
+	* Possibility to set bold characters
+	* New theme : classic
+
+
+Version 1.0b1 (2008-02-26)
+
+	* First version. XML files are parsed and converted into HTML,
+          PDF, LaTeX or text files.
+
+=================================================================================
+								Adrien MOGENET

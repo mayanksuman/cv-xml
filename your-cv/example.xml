@@ -9,6 +9,10 @@
   <header>
     <name>Your Name</name>
     <lastname>Your Lastname</lastname>
+    <!-- nationality - optional -->
+    <nationality>Nationality: French</nationality>
+    <!-- age - optional -->
+    <age>21</age>
     <title>Put a Title Here</title>
     <objective>
       You can describe your personnal objective here
@@ -26,7 +30,7 @@
     <section>
       <title>Education</title>
       <details>
-        <element>
+        <element hidden="no">
           <label>Specific label</label>
           <location>
             <placename>My University</placename>
@@ -37,7 +41,7 @@
           <description>Complete description of this item.</description>
         </element>
 
-        <element>
+        <element hidden="no">
           <label>Diploma</label>
           <date>2007</date>
           <description>with honors (High School
@@ -53,14 +57,14 @@
       <title>Experiences</title>
       <details>
 
-        <element>
+        <element hidden="yes">
 	  <date>2006 - 2007</date>
 	  <description>A very great experience, in a big company for
 	  an important project.</description>
 	  <apport>C, Objective Caml</apport>
         </element>
 
-	<element>
+	<element hidden="no">
           <label>Project leader</label>
           <date>2006 - 2007</date>
           <description>in the CV-XML project, a resume generator !</description>
@@ -68,7 +72,7 @@
         </element>
 
 
-        <element>
+        <element hidden="no">
           <date>2005 - 2006</date>
           <duration>6 months</duration>
           <description>Another project, just for example. There is no
@@ -76,14 +80,14 @@
           <apport>Foo, bar</apport>
         </element>
 
-        <element>
+        <element hidden="no">
           <date>2005</date>
           <description>I don't know what to write here... imagine a
           better content !</description>
           <apport>Techno1, techno2</apport>
         </element>
 
-	<element>
+	<element hidden="no">
 	  <date>2003 - 2004</date>
 	  <duration>2 months</duration>
 	  <description>Network administrator in a French network company.</description>
@@ -99,18 +103,18 @@
       <title>Skills and abilities</title>
       <details>
 
-	<element>
+	<element hidden="no">
           <left>General</left>
           <description>this, that, this, that and this again</description>
         </element>
 
-	<element>
+	<element hidden="no">
 	  <left>Tools</left>
 	  <description>CV-XML, a shell, a text editor</description>
 	</element>
 
 
-        <element>
+        <element hidden="no">
           <left>Other</left>
           <description>Foo, bar, foobar.</description>
         </element>
@@ -123,13 +127,13 @@
     <section>
       <title>Languages</title>
       <details>
-        <element>
+        <element hidden="no">
           <description>Native French speaker</description>
         </element>
-        <element>
+        <element hidden="no">
           <description>Advanced level in English</description>
         </element>
-        <element>
+        <element hidden="no">
           <description>Intermediate level in German</description>
         </element>
 
@@ -141,10 +145,10 @@
     <section>
       <title>Interests</title>
       <details>
-        <element>
+        <element hidden="no">
           <description>Electronic musics</description>
         </element>
-	<element>
+	<element hidden="no">
 	  <description>Snowboard</description>
 	</element>
       </details>
