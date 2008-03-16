@@ -19,10 +19,28 @@ div.defaultstyle
     padding-bottom: 50px;
 }
 
+/* Header : address */
+div.address
+{
+    text-align: left;
+}
+
+/* Header : nationality */
+div.nationality
+{
+    text-align: right;
+}
+
+/* Header : age */
+div.age
+{
+    text-align: right;
+}
+
 /* Header : phone number  */
 div.phone
 {
-    text-align: right;
+    text-align: left;
 }
 
 /* Header : email adress */
@@ -37,7 +55,7 @@ h1
 {
     font-size : 25px;
     text-align : center;
-    margin-bottom: 1px;
+    margin-bottom: 6px;
     margin-top: 40px;
 }
 
@@ -46,7 +64,7 @@ div.objective
 {
     text-align: center;
     font-style: italic;
-    width: 80%;
+    width: 60%;
     margin: auto;
     font-size:  14px;
 }

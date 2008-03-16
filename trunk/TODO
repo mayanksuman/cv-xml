@@ -31,6 +31,11 @@ VARIOUS :
 [x] Check configuration only for needed items
 [ ] Finish the 'text' stylesheet for original theme
 [ ] Finish the 'latex' stylesheet for original theme
+[x] Specify a font for whole document in XSL-Fo
+[ ] Check the DTD
+    [ ] Define the list of values for "hidden"
+[ ] Define a file defining a theme.
+[ ] Delete double same name
 
 
 PACKAGING :
