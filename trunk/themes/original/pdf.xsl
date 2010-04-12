@@ -20,16 +20,16 @@
 	   master-name="simpleA4"
 	   page-height="29.7cm"
 	   page-width="21cm"
-	   margin-top="1.5cm"
-	   margin-bottom="1.5cm"
-	   margin-left="2cm"
-	   margin-right="2cm">
+	   margin-top="1cm"
+	   margin-bottom="1cm"
+	   margin-left="1.5cm"
+	   margin-right="1.5cm">
 	  <fo:region-body/>
 	</fo:simple-page-master>
       </fo:layout-master-set>
 
       <fo:page-sequence master-reference="simpleA4">
-        <fo:flow flow-name="xsl-region-body">
+        <fo:flow flow-name="xsl-region-body" font-family="georgia">
 
 	  <!-- header -->
 	  <fo:block
@@ -75,6 +75,7 @@
 			  <xsl:value-of select="resume/header/coords/email"
 					/>
 			</fo:basic-link>
+
 		      </fo:block>
 		    </fo:block>
 		  </fo:table-cell>
@@ -93,7 +94,7 @@
 	       text-align="center"
 	       font-style="italic"
 	       margin-top="2mm"
-	       font-size="8pt"
+	       font-size="10pt"
 	       width="80%"
 	       margin-bottom="1cm">
 	      <xsl:if test="resume/header/objective!=''">
@@ -112,9 +113,8 @@
 	      <!-- display the title of the section -->
 	      <fo:block border-bottom-style="solid"
 			border-bottom-color="black"
-			margin-bottom="2mm"
-			padding-left="2mm"
-			background-color="#ddddff">
+			margin-bottom="5mm"
+			padding-left="2mm">
 		<xsl:value-of select="title"/>
 	      </fo:block>
 
@@ -138,7 +138,7 @@
 
 		      <!-- left column -->
 		      <fo:table-cell column-number="1" text-align="end">
-			<fo:block font-size="10pt" color="#009900">
+			<fo:block font-size="10pt" color="#000099">
 			  <xsl:value-of select="date" />
 			  <xsl:if test="duration!=''">
 			    <fo:block font-size="8pt" color="#666">
@@ -146,7 +146,7 @@
 			    </fo:block>
 			  </xsl:if>
 			<xsl:if test="left!=''">
-			  <fo:block color="#333366">
+			  <fo:block color="#000099">
 			    <xsl:value-of select="left" /> :
 			  </fo:block>
 			</xsl:if>
